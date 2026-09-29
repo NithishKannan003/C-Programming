@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[100];
+    int frequency[256] = {0};
+    int found = 0;
+
+    printf("Enter a string: ");
+    
+    if (fgets(str, sizeof(str), stdin) == NULL) {
+        printf("-1\n");
+        return 0;
+    }
+
+    str[strcspn(str, "\n")] = '\0';
+    int len = strlen(str);
+
+    for (int i = 0; i < len; i++) {
+        unsigned char ch = str[i];
+        frequency[ch]++;
+    }
+
+    for (int i = 0; i < len; i++) {
+        unsigned char ch = str[i];
+        if (frequency[ch] == 1) {
+            printf("%c\n", str[i]);
+            found = 1;
+            break;
+        }
+    }
+
+    if (!found) {
+        printf("-1\n");
+    }
+
+    return 0;
+}
